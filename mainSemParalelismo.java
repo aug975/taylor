@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.BigInteger;
 
-@SuppressWarnings("unused")
 class Main {
 
     public static void main(String[] args) {
@@ -14,7 +13,6 @@ class Main {
         System.out.printf("\nTempo sem paralelismo: %.3f s%n", (elapsed) / 1000d);
     }
     
-    @SuppressWarnings("deprecation")
 	private static BigDecimal getExp(double x, int precision, int steps){
          BigDecimal sum = BigDecimal.ZERO;
          BigDecimal X = BigDecimal.valueOf(x);
