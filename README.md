@@ -40,6 +40,8 @@ Obs.: Uma otimização possível que não foi implementada nessa versão seria a
 Foram realizadas observações com diferentes valores de números de termos e precisões (número de casas decimais) para entendimento do comportamento do tempo de execução em relação às variáveis. Em situações de menor precisão, muitas vezes os termos adicionais da série atingiam valor zero em relação à mesma, deixando de contribuir com a composição do valor final. 
 
 ### Cenários de Teste
+Obs.: Estes testes demoram horas para concluir. Testes com screenshots não inclusos ainda estão finalizando e serão inclusos posteriormente.
+
 100.000 termos com precisão 10.000
 
 100.000 termos com precisão 50.000
