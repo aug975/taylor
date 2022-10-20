@@ -30,7 +30,7 @@ Os logs gerados nas execuções de teste estão em imagens mais abaixo. Foram ti
 ## Sobre o programa (V2)
 O código foi construído em linguagem Java com utilização das classes BigDecimal e BigInteger para alcançar uma precisão desejada. As operações matemáticas utilizadas são também específicas dessas classes.
 
-Foi adotada uma solução de paralelismo através da qual se criou oito instâncias de uma classe Tarefa, sendo cada uma delas responsável por processar simultâneamente a mesma proporção de termos da série de Taylor. Ao final da execução da última instância, os oitos valores obtidos são somados para se chegar ao resultado final. 
+Foi adotada uma solução de paralelismo através da qual se criou quatro instâncias de uma classe Tarefa, sendo cada uma delas responsável por processar simultâneamente a mesma proporção de termos da série de Taylor. Ao final da execução da última instância, os quatro valores obtidos são somados para se chegar ao resultado final. 
 
 No mesmo código, na sequência da execução paralela, é feita uma nova execução com uma única instância para permitir a comparação dos tempos de execução (com e sem paralelismo). 
 
@@ -42,7 +42,10 @@ Foram realizadas observações com diferentes valores de números de termos e pr
 ### Cenários de Teste
 Obs.: Estes testes demoram para concluir. Testes com prints de tela ainda não inclusos ainda estão finalizando e serão inclusos posteriormente.
 
-100.000 termos com precisão 10.000
+Teste 1: 10.000 termos com precisão 100
+
+![image](https://user-images.githubusercontent.com/101229028/196904812-bcff7441-5335-473c-8282-5865066ef681.png)
+
 
 100.000 termos com precisão 50.000
 
