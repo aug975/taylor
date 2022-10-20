@@ -47,12 +47,12 @@ Teste 1: 10.000 termos com precisão 100
 ![image](https://user-images.githubusercontent.com/101229028/196904812-bcff7441-5335-473c-8282-5865066ef681.png)
 
 
-100.000 termos com precisão 50.000
+100.000 termos com precisão 100
+
+100.000 termos com precisão de 1.000
 
 1.000.000 termos com precisão de 100
 
-1.000.000 termos com precisão de 1.000
+1.000.000 termos com precisão 1.000
 
 1.000.000 termos com precisão 10.000
-
-1.000.000 termos com precisão 100.000
