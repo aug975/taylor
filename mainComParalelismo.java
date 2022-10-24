@@ -38,7 +38,7 @@ class Tarefa extends Thread {
      Este método se faz necessário para que possamos dar start() na Thread
      e iniciar a tarefa em paralelo
      */
-	@Override
+    @Override
     public void run() {
       BigDecimal X = BigDecimal.valueOf(x);
       BigDecimal m;
@@ -65,8 +65,9 @@ class Main {
     
     public static void main(String[] args) {
 
-      int precision = 10000;
-      int T = 100000;
+      int precision = 100000;
+      int T = 1000000;
+      int cores = Runtime.getRuntime().availableProcessors();
 
       long start = System.currentTimeMillis();
       //cria quatro tarefas
@@ -104,10 +105,8 @@ class Main {
         }
 
       System.out.println("Total: " + tot);
-      
       long elapsed = System.currentTimeMillis() - start;
-      System.out.printf("\nTempo com paralelismo: %.3f s%n", (elapsed) / 1000d);
-
+      System.out.printf("\nTempo usando %d CPU core(s) com paralelismo de 4 Threads, para %d casas, %d termos: %.3f s%n", cores, precision, T,  (elapsed) / 1000d);
             
     }
 
