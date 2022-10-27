@@ -2,6 +2,57 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.BigInteger;
 
+public class Main {
+    
+    public static void main(String[] args) {
+
+      int precision = 100000;
+      int T = 1000000;
+      int cores = Runtime.getRuntime().availableProcessors();
+
+      long start = System.currentTimeMillis();
+      //cria quatro tarefas
+      Tarefa t1 = new Tarefa(1, precision, T/4, 1);
+      t1.setName("Tarefa1");
+      Tarefa t2 = new Tarefa(1, precision, T/4, 2);
+      t2.setName("Tarefa2");
+      Tarefa t3 = new Tarefa(1, precision, T/4, 3);
+      t3.setName("Tarefa3");
+      Tarefa t4 = new Tarefa(1, precision, T/4, 4);
+      t4.setName("Tarefa4");
+
+      BigDecimal tot = BigDecimal.ZERO;
+
+      //inicia a execução paralela das quatro tarefas, iniciando quatro novas threads no programa
+      t1.start();
+      t2.start();
+      t3.start();
+      t4.start();
+
+      //aguarda a finalização das tarefas
+      //faz o somatório dos totalizadores de cada Thread
+      try {
+        t1.join();
+        tot = tot.add(t1.getTotal());
+        t2.join();
+        tot = tot.add(t2.getTotal());
+        t3.join();
+        tot = tot.add(t3.getTotal());
+        t4.join();
+        tot = tot.add(t4.getTotal());
+        } 
+      catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+
+      System.out.println("Total: " + tot);
+      long elapsed = System.currentTimeMillis() - start;
+      System.out.printf("\nTempo usando %d CPU core(s) com paralelismo de 4 Threads, para %d casas, %d termos: %.3f s%n", cores, precision, T,  (elapsed) / 1000d);
+            
+    }
+
+}
+
 class Tarefa extends Thread {
 
     private double x;
@@ -59,55 +110,4 @@ class Tarefa extends Thread {
       return;
 
     }
-}
-
-class Main {
-    
-    public static void main(String[] args) {
-
-      int precision = 100000;
-      int T = 1000000;
-      int cores = Runtime.getRuntime().availableProcessors();
-
-      long start = System.currentTimeMillis();
-      //cria quatro tarefas
-      Tarefa t1 = new Tarefa(1, precision, T/4, 1);
-      t1.setName("Tarefa1");
-      Tarefa t2 = new Tarefa(1, precision, T/4, 2);
-      t2.setName("Tarefa2");
-      Tarefa t3 = new Tarefa(1, precision, T/4, 3);
-      t3.setName("Tarefa3");
-      Tarefa t4 = new Tarefa(1, precision, T/4, 4);
-      t4.setName("Tarefa4");
-
-      BigDecimal tot = BigDecimal.ZERO;
-
-      //inicia a execução paralela das quatro tarefas, iniciando quatro novas threads no programa
-      t1.start();
-      t2.start();
-      t3.start();
-      t4.start();
-
-      //aguarda a finalização das tarefas
-      //faz o somatório dos totalizadores de cada Thread
-      try {
-        t1.join();
-        tot = tot.add(t1.getTotal());
-        t2.join();
-        tot = tot.add(t2.getTotal());
-        t3.join();
-        tot = tot.add(t3.getTotal());
-        t4.join();
-        tot = tot.add(t4.getTotal());
-        } 
-      catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-
-      System.out.println("Total: " + tot);
-      long elapsed = System.currentTimeMillis() - start;
-      System.out.printf("\nTempo usando %d CPU core(s) com paralelismo de 4 Threads, para %d casas, %d termos: %.3f s%n", cores, precision, T,  (elapsed) / 1000d);
-            
-    }
-
 }
