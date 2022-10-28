@@ -21,7 +21,6 @@ class Main {
              m = X.pow(i).divide(new BigDecimal(Main.factorial(i)),precision,BigDecimal.ROUND_HALF_UP);
              //System.out.println("\nx^"+i+"/"+i+"! = "+m);
              sum = sum.add(m);
-
              // quando incremento da serie menor do que precisao interrompe a soma
              if (BigDecimal.ZERO.compareTo(m) == 0){
                return sum;
