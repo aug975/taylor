@@ -8,7 +8,7 @@ class Main {
 
     public static void main(String[] args) {
         long start = System.currentTimeMillis();
-        System.out.println("\n\nResult: "+getExp(1,10000,100000));
+        System.out.println("\n\nResult: "+getExp(1,1000,1000));
         long elapsed = System.currentTimeMillis() - start;
         System.out.printf("\nTempo sem paralelismo: %.3f s%n", (elapsed) / 1000d);
     }
