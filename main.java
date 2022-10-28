@@ -6,8 +6,8 @@ class Main {
     
     public static void main(String[] args) {
 
-      int precision = 100;
-      int T = 100;
+      int precision = 1000;
+      int T = 1000;
       int cores = Runtime.getRuntime().availableProcessors();
 
       long start = System.currentTimeMillis();
