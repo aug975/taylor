@@ -2,7 +2,7 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.BigInteger;
 
-public class Main {
+class Main {
     
     public static void main(String[] args) {
 
