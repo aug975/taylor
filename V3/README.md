@@ -17,7 +17,7 @@ Devido ao desenvolvimento na linguagem Java, não é possível a implementação
 
 # 2 - omp critical
 
-O código já possui uma forma de controle de acesso. O loop em que a variável final é acessada se divide em iterações para cada thread. Esta variável final não é global, mas para cada instância, pois as threads trabalham dentro de uma classe Tarefa. Desta forma, o acesso à variável não causa interferências nas operações entre as threads, que permanecem em instância até o momento em que somam seus valores por meio de `.join`. Este controle está detalhado a mais no arquivo critical.md no repositório.
+O código já possui uma forma de controle de acesso. O loop em que a variável final é acessada se divide em iterações para cada thread. Esta variável final não é global, mas para cada instância, pois as threads trabalham dentro de uma classe Tarefa. Desta forma, o acesso à variável não causa interferências nas operações entre as threads, que permanecem em instância até o momento em que somam seus valores por meio de `.join`. Este controle está detalhado a mais no arquivo [critical.md](https://github.com/aug975/taylor/blob/main/V3/critical.md) no repositório.
 
 Como não há variável global, um controle de uma região crítica não é necessário. Mas pode-se realizar uma comparação de tempo se modificarmos a forma como cada thread muda sua variável `sum`.
 
@@ -39,7 +39,7 @@ Como não há variável global, um controle de uma região crítica não é nece
 Esta modificação no código remove a soma que cada thread faz sobre a variável total. Com a soma, a ordem não importa, e portanto essa região não é crítica, pois as threads podem operar nela ao mesmo tempo. Mas se transformamos em um `=`, pode ocorrer interferência entre threads, pois o valor pode ser modificado fora de ordem. 
 Com isso, surge uma região crítica do código. Se executamos este código, podemos comparar o valor total e o tempo com a versão original, onde há controle.
 
-**Como o teste será realizado na AWS, utilizaremos a versão de 2 Threads, pois a AWS atualmente tem um limite de dois processadores. Esta versão está no repositório.**
+**Como o teste será realizado na AWS, utilizaremos a versão de 2 Threads, pois a AWS atualmente tem um limite de dois processadores. [Esta versão está no repositório.](https://github.com/aug975/taylor/blob/main/V3/main2Threads.java)**
 
 ![image](https://user-images.githubusercontent.com/101229028/200959438-e0d578b1-8dcb-46cc-a772-2dd3fabf5f19.png)
 > Resultado sem controle: 1.646202E-9994 
@@ -53,11 +53,11 @@ Comparado com versão controlada:
 
 Percebe-se que sem o controle da região crítica, mesmo executando em quantidade similar de tempo, o valor total é incorreto devido à interferência entre as threads.
 
-# 3 - critical.md
+# 3 - [critical.md](https://github.com/aug975/taylor/blob/main/V3/critical.md)
 
 # 4 - Comparação de tempo
 
-Vamos comparar o tempo de execução com 1 processador (serial) e com 2 processadores. Para que a comparação seja justa, temos que comparar o tempo de execução do mesmo código. Para isto, usaremos a versão nThreads, que divide em tarefas equivalentes e proporcionais ao número de processadores disponíveis. Esta versão está no repositório.
+Vamos comparar o tempo de execução com 1 processador (serial) e com 2 processadores. Para que a comparação seja justa, temos que comparar o tempo de execução do mesmo código. Para isto, usaremos a versão nThreads, que divide em tarefas equivalentes e proporcionais ao número de processadores disponíveis. [Esta versão está no repositório.](https://github.com/aug975/taylor/blob/main/V3/main_nThreads.java)
 
 **Primeiro, testamos em uma máquina de 1 processador.**
 
