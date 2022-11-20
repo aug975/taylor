@@ -7,8 +7,8 @@ class Main {
     
     public static void main(String[] args) {
     	
-      int precision = 1000;
-      int T = 1000;
+      int precision = 10000;
+      int T = 1000000;
       int cores = Runtime.getRuntime().availableProcessors();
       int tds = cores;
       
