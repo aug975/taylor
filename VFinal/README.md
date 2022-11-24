@@ -59,12 +59,33 @@ você precisa especificar como deseja arredondar determinado valor se for necess
 Sendo assim, precisamos dizer explicitamente como desejamos que o arredondamento ocorra caso haja uma dízima.
 
 ### Paralelismo em Java
-
-O processamento paralelo, ou concorrente, tem como base o uso de um hardware multicore, onde dispõe-se de vários núcleos de processamento. 
-A arquitetura Multicore consiste no uso de CPUs que possuem mais de um núcleo de processamento, o que possibilita a execução de mais de uma tarefa simultaneamente. A abordagem de se criar CPUs multicore surgiu a partir do momento em que começou a se tornar inviável desenvolver CPUs com frequências (GHz) mais altas, devido ao superaquecimento. Os processadores multicore não somam sua capacidade de processamento, mas sim possibilitam a divisão das tarefas entre si, permitindo ganhos de performance. Este ganho porém, é possível apenas se no nível de software se implementar o uso do paralelismo. 
-O conceito de multithreading está relacionado a proporcionar ao software subdividir suas tarefas em trechos de código independentes e capazes de executar em paralelo, chamados de threads. Com isto, cada uma destas tarefas pode ser executada em paralelo caso haja vários núcleos de processador.
-Na plataforma Java, as threads são, de fato, o único mecanismo de concorrência suportado. De forma simples, podemos entender esse recurso como trechos de código que operam independentemente da sequência de execução principal. Como diferencial,  as threads dividem um mesmo espaço de memória, e isso lhes permite compartilhar dados e informações dentro do contexto do software.
+ 
+Na plataforma Java, as threads são, de fato, o único mecanismo de concorrência suportado. De forma simples, podemos entender esse recurso como trechos de código que operam independentemente da sequência de execução principal. Como diferencial,  as threads dividem um mesmo espaço de memória, e isso lhes permite compartilhar dados 
+e informações dentro do contexto do software.
 Desde seu início a plataforma Java foi projetada para suportar programação concorrente. De lá para cá, principalmente a partir da versão 5, foram incluídas APIs de alto nível que fornecem cada vez mais recursos para a implementação de tarefas paralelas. Toda aplicação Java possui, no mínimo, uma thread, que é criada e iniciada pela JVM quando iniciamos a aplicação e tem como função executar o método main() da classe principal.
+
 Em Java, existem basicamente duas maneiras de criar threads:
-•	Estender a classe Thread (java.lang.Thread)
-•	Implementar a interface Runnable (java.lang.Runnable)
+-	Estender a classe Thread (java.lang.Thread)
+-	Implementar a interface Runnable (java.lang.Runnable)
+
+## O Algoritmo
+
+O algoritmo implementa a Série de Taylor da constante de Euler, buscando a maior aproximação para o valor de ***e***.
+A partir das definições para as questões já apresentadas ligadas a precisão, exatidão e paralelismo nos cálculos dos valores da série, 
+o algoritmo é relativamente simples, com uma [função principal `getTotal()`](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L79), [descrita no método `run()`](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L102) que calcula a soma dos termos da série:
+
+O cálculo dos termos da série se baseia em funções da classe BigDecimal para manipulação adequada de valores de pontos flutuantes de precisão arbitrária.
+Utiliza-se também uma [função auxiliar](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L59) para cálculo do fatorial.
+
+Para permitir o paralelismo de forma simples e balanceada, a variável `steps` é passada como parâmetro para definir o subconjunto de termos que será somado naquela thread. 
+
+Se temos **2 threads**, por exemplo, quando `steps` tem valor *1* na primeira thread, os termos somados são com denominador *0!, 2!, 4!, ...*
+
+Quando tem valor *2* na segunda thread, os termos somados tem denominador *1!, 3!, 5!, ...* 
+
+![image](https://user-images.githubusercontent.com/101229028/203701508-2269e394-ac24-48bb-a758-2b727c722df8.png)
+
+Da mesma forma, com **n threads**, a primeira thread somaria os termos com denominador *0!, n!, 2n!, ...* a segunda thread *1!, (n+1)!, (2n+1)!, ...* e assim sucessivamente até a última com denominadores *(n-1)!, (2n-1)!, (3n-1)!, ...*
+
+
+
