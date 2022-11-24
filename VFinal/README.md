@@ -72,7 +72,7 @@ Em Java, existem basicamente duas maneiras de criar threads:
 
 O algoritmo implementa a Série de Taylor da constante de Euler, buscando a maior aproximação para o valor de ***e***.
 A partir das definições para as questões já apresentadas ligadas a precisão, exatidão e paralelismo nos cálculos dos valores da série, 
-o algoritmo é relativamente simples, com uma [função principal `getTotal()`](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L79), [descrita no método `run()`](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L102) que calcula a soma dos termos da série:
+o algoritmo é relativamente simples, com uma [função principal `getTotal()`](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L79), [descrita no método `run()`](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L88-L103) que calcula a soma dos termos da série:
 
 O cálculo dos termos da série se baseia em funções da classe BigDecimal para manipulação adequada de valores de pontos flutuantes de precisão arbitrária.
 Utiliza-se também uma [função auxiliar](https://github.com/aug975/taylor/blob/cd1e39b7f3964a435b561fafbcead3a3196d3b31/VFinal/main.java#L59) para cálculo do fatorial.
