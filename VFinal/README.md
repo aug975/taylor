@@ -17,7 +17,7 @@ A partir desta análise, foram feitos testes com diferentes linguagens como Pyth
 arbitrária implementada em base decimal. A classe **BigDecimal** do Java demonstrou a possibilidade de alta precisão, exatidão no resultado e um bom nível de performance,
 além de simplicidade para construção do código.
 
-## Precisão e exatidão
+### Precisão e exatidão
 
 Tipos de ponto flutuante costumam ser implementados por representação binária para que os cálculos sejam feitos rapidamente pelos processadores. 
 Se a representação é decimal o cálculo não é natural para o processador e leva mais tempo. Mas há uma desvantagem nessa escolha - não há exatidão quando se 
@@ -30,7 +30,7 @@ Números com ponto flutuante com representação binária são armazenados com u
 
 ![image](https://user-images.githubusercontent.com/101229028/203676404-c4ca6748-9760-4d21-9237-308525e9cd63.png)
 
-## Tipo decimal
+### Tipo decimal
 
 O tipo decimal tem exatidão, ou seja, ele permite ter o número exato que se pretende. Ele se chama decimal por ter base 10 e não binária.
 
@@ -42,7 +42,7 @@ em geral até ilimitados. Neste caso, os cálculos são feitos com instruções 
 do número, precisa prover algum arredondamento, muitas vezes o seu código precisa fazer alguma conta extra, então acaba ficando mais lento, 
 mas normalmente nada crítico.
 
-## A representação numérica utilizada no Java
+### A representação numérica utilizada no Java
 
 Assim como em outras linguagens, o Java representa tipos como *double* na JVM com uma representação binária que segue o padrão IEEE 754.
 Pelo fato da JVM trabalhar com representação binária para o tipo double, um valor como “0.1”, por exemplo, é transformado para binário e vira uma dízima periódica, 
@@ -57,3 +57,14 @@ precisamos.
 Temos ainda outro ponto de atenção em relação o BigDecimal: este não faz nenhum tipo de arredondamento por si próprio, ou seja, 
 você precisa especificar como deseja arredondar determinado valor se for necessário, caso contrário, ele lançará uma exceção. 
 Sendo assim, precisamos dizer explicitamente como desejamos que o arredondamento ocorra caso haja uma dízima.
+
+### Paralelismo em Java
+
+O processamento paralelo, ou concorrente, tem como base o uso de um hardware multicore, onde dispõe-se de vários núcleos de processamento. 
+A arquitetura Multicore consiste no uso de CPUs que possuem mais de um núcleo de processamento, o que possibilita a execução de mais de uma tarefa simultaneamente. A abordagem de se criar CPUs multicore surgiu a partir do momento em que começou a se tornar inviável desenvolver CPUs com frequências (GHz) mais altas, devido ao superaquecimento. Os processadores multicore não somam sua capacidade de processamento, mas sim possibilitam a divisão das tarefas entre si, permitindo ganhos de performance. Este ganho porém, é possível apenas se no nível de software se implementar o uso do paralelismo. 
+O conceito de multithreading está relacionado a proporcionar ao software subdividir suas tarefas em trechos de código independentes e capazes de executar em paralelo, chamados de threads. Com isto, cada uma destas tarefas pode ser executada em paralelo caso haja vários núcleos de processador.
+Na plataforma Java, as threads são, de fato, o único mecanismo de concorrência suportado. De forma simples, podemos entender esse recurso como trechos de código que operam independentemente da sequência de execução principal. Como diferencial,  as threads dividem um mesmo espaço de memória, e isso lhes permite compartilhar dados e informações dentro do contexto do software.
+Desde seu início a plataforma Java foi projetada para suportar programação concorrente. De lá para cá, principalmente a partir da versão 5, foram incluídas APIs de alto nível que fornecem cada vez mais recursos para a implementação de tarefas paralelas. Toda aplicação Java possui, no mínimo, uma thread, que é criada e iniciada pela JVM quando iniciamos a aplicação e tem como função executar o método main() da classe principal.
+Em Java, existem basicamente duas maneiras de criar threads:
+•	Estender a classe Thread (java.lang.Thread)
+•	Implementar a interface Runnable (java.lang.Runnable)
