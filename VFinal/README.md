@@ -93,6 +93,8 @@ O programa principal estende a classe Threads, criando n threads, onde n é por 
 
 Foram realizados testes em máquina local e na AWS. Os testes em máquina local foram realizados com Java em Windows.
 
+### Testes locais  - Tempo de execução
+
 | CPU Cores | 10 000 casas | 100 000 casas |
 | :---: | :---: | :---: |
 | 1 | 2.676s | 1204.127s |
@@ -101,3 +103,27 @@ Foram realizados testes em máquina local e na AWS. Os testes em máquina local 
 | 8 | 1.388s | 542.362s |
 | 12 | 1.388s | 526.924s |
 
+![image](https://user-images.githubusercontent.com/101229028/203711156-f7d275c6-93ef-4897-a328-dad0cee989a6.png)
+
+![image](https://user-images.githubusercontent.com/101229028/203711289-75c2aa6d-d9d4-46b4-845a-bc99847bfdec.png)
+
+### Testes locais - Speedup
+
+| CPU Cores | 10 000 casas | 100 000 casas |
+| :---: | :---: | :---: |
+| 1 | 1 | 1 |
+| 2 | 1.542 | 1.698 |
+| 4 | 1.762 | 2.205 |
+| 8 | 1.928 | 2.220 |
+| 12 | 1.928 | 2.285 |
+
+![image](https://user-images.githubusercontent.com/101229028/203711858-2619675e-2470-4750-b4b2-778f3027c07d.png)
+
+![image](https://user-images.githubusercontent.com/101229028/203711879-50b6a7aa-9d50-4432-a2f5-5380a0e5e42d.png)
+
+### Testes AWS - Tempo de execução
+
+| CPU Cores | 1 000 casas | 10 000 casas | 100 000 casas |
+| :---: | :---: | :---: | :---: |
+| 1 | 0.239s | 8.208s | 1946.987s |
+| 2 | 0.130s | 5.842s | 1217.731s |
