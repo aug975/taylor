@@ -87,5 +87,17 @@ Quando tem valor *2* na segunda thread, os termos somados tem denominador *1!, 3
 
 Da mesma forma, com **n threads**, a primeira thread somaria os termos com denominador *0!, n!, 2n!, ...* a segunda thread *1!, (n+1)!, (2n+1)!, ...* e assim sucessivamente até a última com denominadores *(n-1)!, (2n-1)!, (3n-1)!, ...*
 
+O programa principal estende a classe Threads, criando n threads, onde n é por default o número de cores de CPU detectado no host onde o programa é executado, ou parâmetro passado como argumento - caso informado, e após cada uma delas fazer a soma de parte dos termos, as somas parciais são agregadas em uma variável `tot` na classe Main, que ao final acumula o valor total da série para a aproximação de ***e***.
 
+## Testes e Speedup
+
+Foram realizados testes em máquina local e na AWS. Os testes em máquina local foram realizados com Java em Windows.
+
+| CPU Cores | 10 000 casas | 100 000 casas |
+| :---: | :---: | :---: |
+| 1 | 2.676s | 1204.127s |
+| 2 | 1.735s | 709.192s |
+| 4 | 1.519s | 546.092s |
+| 8 | 1.388s | 542.362s |
+| 12 | 1.388s | 526.924s |
 
