@@ -127,3 +127,38 @@ Foram realizados testes em máquina local e na AWS. Os testes em máquina local 
 | :---: | :---: | :---: | :---: |
 | 1 | 0.239s | 8.208s | 1946.987s |
 | 2 | 0.130s | 5.842s | 1217.731s |
+
+![image](https://user-images.githubusercontent.com/101229028/203712438-c9d70a1c-3801-4b98-8b21-ff5eb32b7747.png)
+
+![image](https://user-images.githubusercontent.com/101229028/203712461-0e4f3eb1-ddd7-4cca-a112-58c0b242f7ff.png)
+
+![image](https://user-images.githubusercontent.com/101229028/203712585-3ff3c749-5de1-4e43-9034-25360722af80.png)
+
+### Testes AWS - Speedup
+
+| CPU Cores | 1 000 casas | 10 000 casas | 100 000 casas |
+| :---: | :---: | :---: | :---: |
+| 1 | 1 | 1 | 1 |
+| 2 | 1.838 | 1.404 | 1.598 |
+
+![image](https://user-images.githubusercontent.com/101229028/203712738-b6356457-fbb1-4a9c-b1bf-0d934f2f1664.png)
+
+## Modelo de Paralelismo
+
+No algoritmo desenvolvido para a solução, o programa realiza o somatório de todos os valores da série de Taylor. 
+A primeira versão foi baseada em uma solução sequencial, que se inicia no primeiro termo e *a mesma thread vai até seu último*.
+
+Quando passamos a usar **multi-threading**, estendemos a classe `Thread`, com a criação de uma classe `Tarefa` responsável por realizar o somatório de um subconjunto de termos da série no momento em que ela é criada e armazená-lo em uma variável para que possa ser agregado posteriormente.
+
+Cada thread recebe assim, um intervalo de valores para somar, de forma alternada para balancear melhor o volume, pois os termos crescem de forma fatorial.  
+Ao final, cada thread fornece seu somatório para totalizar com as somas das outras threads. 
+Nesta solução, depois de darmos início a cada thread, temos que esperar cada uma terminar seu processamento para só então pegar o seu total.
+Isso é possível através da função `join()` da thread. O conceito por trás disto é o de ***“Dividir para conquistar”***.
+
+Por se tratar também de uma soma de termos que foi subdividida, no algoritmo desenvolvido ___não foi necessário utilizar uma variável global comum___. 
+Cada thread acumulou a soma dos seus termos em uma variavel `sum` com escopo dentro da própria thread, e ao final o valor acumulado em cada instância foi sendo adicionado em uma nova variavel `tot` do programa principal. 
+Por conta disso, **não foi necessário se pensar em nenhum mecanismo de controle da região crítica.**
+
+A solução de paralelismo foi feita inicialmente de uma forma simples e prática, paralelizando as tarefas de forma estática, com a quantidade de threads prefixada nas versões de código, para facilitar a execução dos diferentes cenários de teste.
+
+Nesta etapa do desafio, acrescentamos no GitHub uma nova versão do código, que identifica o número de CPU cores do ambiente de execução, e de forma dinâmica estende o número de classes equivalente, buscando otimizar a performance.
