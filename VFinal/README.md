@@ -65,7 +65,7 @@ e informações dentro do contexto do software.
 Desde seu início a plataforma Java foi projetada para suportar programação concorrente. De lá para cá, principalmente a partir da versão 5, foram incluídas APIs de alto nível que fornecem cada vez mais recursos para a implementação de tarefas paralelas. Toda aplicação Java possui, no mínimo, uma thread, que é criada e iniciada pela JVM quando iniciamos a aplicação e tem como função executar o método main() da classe principal.
 
 Em Java, existem basicamente duas maneiras de criar threads:
--	Estender a classe Thread (java.lang.Thread)
+-	Extender a classe Thread (java.lang.Thread)
 -	Implementar a interface Runnable (java.lang.Runnable)
 
 ## O Algoritmo
